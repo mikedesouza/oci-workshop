@@ -7,7 +7,10 @@ provider "oci" {
   disable_auto_retries = "true"
 }
 
+provider "random" {}
+
 variable "tenancy" {}
+
 variable "user" {}
 variable "fingerprint" {}
 variable "key_file" {}
