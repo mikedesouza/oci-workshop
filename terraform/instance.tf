@@ -25,7 +25,16 @@ resource "oci_core_instance" "myinstance" {
 
   metadata {
     ssh_authorized_keys = "${var.ssh_public_key}"
-    user_data           = "${base64encode(file("${path.module}/instance.tpl"))}"
+    user_data           = "${base64encode(data.template_file.userdata.rendered)}"
+  }
+}
+
+data "template_file" "userdata" {
+  template = "${file("${path.module}/instance.tpl")}"
+
+  vars {
+    workshop_version = "${lookup(data.external.version.result, "oci-workshop")}"
+    tweet            = "1013378279347286016"
   }
 }
 
@@ -47,9 +56,9 @@ data "oci_core_public_ips" "mypublicips" {
   compartment_id      = "${var.compartment}"
   scope               = "AVAILABILITY_DOMAIN"
   availability_domain = "${lookup(data.oci_identity_availability_domains.primary_availability_domains.availability_domains[0],"name")}"
-  
+
   filter {
-    name = "private_ip_id"
+    name   = "private_ip_id"
     values = ["${lookup(data.oci_core_private_ips.myprivateip.private_ips[0], "id")}"]
   }
 }

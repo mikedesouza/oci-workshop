@@ -8,6 +8,7 @@ provider "oci" {
 }
 
 provider "random" {}
+provider "external" {}
 
 variable "tenancy" {}
 
