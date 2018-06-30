@@ -5,6 +5,7 @@ TF_VAR_user=$(grep "^user=" ~/.oci/config | cut -d'=' -f2)
 TF_VAR_fingerprint=$(grep "^fingerprint=" ~/.oci/config | cut -d'=' -f2)
 TF_VAR_key_file=$(grep "^key_file=" ~/.oci/config | cut -d'=' -f2)
 TF_VAR_region=$(grep "^region=" ~/.oci/config | cut -d'=' -f2) 
+TF_VAR_ssh_public_key=$(cat "$HOME/.ssh/id_rsa.pub" | tail -n 1)
 
 DIR="$(dirname "$0")"
 
@@ -13,4 +14,4 @@ if [[ -f "${DIR}/.env" ]]; then
 fi
 
 export TF_VAR_tenancy TF_VAR_user TF_VAR_fingerprint TF_VAR_key_file
-export TF_VAR_region
+export TF_VAR_region TF_VAR_ssh_public_key
