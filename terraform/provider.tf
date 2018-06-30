@@ -12,3 +12,5 @@ variable "user" {}
 variable "fingerprint" {}
 variable "key_file" {}
 variable "region" {}
+
+variable "compartment" {}
