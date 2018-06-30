@@ -12,6 +12,8 @@ resource "oci_identity_policy" "devinstance_policies" {
 
   statements = [
     "Allow dynamicgroup ${oci_identity_dynamic_group.devinstances.name} to manage buckets in compartment DevTeam",
+    "Allow dynamicgroup ${oci_identity_dynamic_group.devinstances.name} to read buckets in compartment DevTeam",
+    "Allow dynamicgroup ${oci_identity_dynamic_group.devinstances.name} to read objects in compartment DevTeam",
   ]
 }
 
